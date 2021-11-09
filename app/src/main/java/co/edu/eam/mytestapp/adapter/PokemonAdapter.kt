@@ -1,5 +1,6 @@
 package co.edu.eam.mytestapp.adapter
 
+import android.graphics.Color
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -8,6 +9,18 @@ import co.edu.eam.mytestapp.model.pokemon.Pokemon
 import com.bumptech.glide.Glide
 
 class PokemonAdapter(var lista:Array<Pokemon?>):RecyclerView.Adapter<PokemonAdapter.ViewHolder>() {
+
+    val fireElement="#d2192f"
+    val electricElement="#ccd219"
+    val waterElement="#19d2d2"
+    val grassElement="#19d244"
+    val iceElement="#00ffbf"
+    val fightingElement="#ff6600"
+    val rockElement="#732800"
+    val psychicElement="#db00af"
+    val flyingElement="#0004db"
+    val bugElement="#007502"
+    val poisonElement="#2b0057"
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         val v = ItemPokemonBinding.inflate( LayoutInflater.from(parent.context), parent, false )
@@ -29,6 +42,41 @@ class PokemonAdapter(var lista:Array<Pokemon?>):RecyclerView.Adapter<PokemonAdap
                     .into(view.imgPoke)
                 view.numPoke.text = pokemon.id.toString()
                 view.namePoke.text = pokemon.name
+                pokemon.types.forEach {
+                    if (it.type.name == "grass") {
+                        view.parentLayout.setBackgroundColor(Color.parseColor(grassElement))
+                    }
+                    if(it.type.name == "fire"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(fireElement))
+                    }
+                    if(it.type.name == "electric"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(electricElement))
+                    }
+                    if(it.type.name == "water"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(waterElement))
+                    }
+                    if(it.type.name == "ice"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(iceElement))
+                    }
+                    if(it.type.name == "fighting"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(fightingElement))
+                    }
+                    if(it.type.name == "rock"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(rockElement))
+                    }
+                    if(it.type.name == "psychic"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(psychicElement))
+                    }
+                    if(it.type.name == "flying"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(flyingElement))
+                    }
+                    if(it.type.name == "bug"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(bugElement))
+                    }
+                    if(it.type.name == "poison"){
+                        view.parentLayout.setBackgroundColor(Color.parseColor(poisonElement))
+                    }
+                }
             }
         }
     }

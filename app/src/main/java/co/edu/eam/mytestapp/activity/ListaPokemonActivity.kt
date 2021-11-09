@@ -41,6 +41,8 @@ class ListaPokemonActivity : AppCompatActivity() {
                 override fun onResponse(call: Call<Pokemon>, response: Response<Pokemon>) {
                     if(response.isSuccessful){
                         response.body()!!.image = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${i}.png"
+
+                        //print(response.body()!!.types[0].type.javaClass.name)
                         lista[i-1] = response.body()!!
                         adapter.notifyItemChanged(i-1)
                     }
