@@ -45,36 +45,69 @@ class PokemonAdapter(var lista:Array<Pokemon?>):RecyclerView.Adapter<PokemonAdap
                 pokemon.types.forEach {
                     if (it.type.name == "grass") {
                         view.parentLayout.setBackgroundColor(Color.parseColor(grassElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/grass.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "fire"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(fireElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/fire.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "electric"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(electricElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/electric.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "water"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(waterElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/water.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "ice"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(iceElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/ice.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "fighting"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(fightingElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/fighting.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "rock"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(rockElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/rock.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "psychic"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(psychicElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/psychic.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "flying"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(flyingElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/flying.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "bug"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(bugElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/bug.png")
+                            .into(view.imgIco)
                     }
                     if(it.type.name == "poison"){
                         view.parentLayout.setBackgroundColor(Color.parseColor(poisonElement))
+                        Glide.with(view.imgIco.context)
+                            .load("https://raw.githubusercontent.com/GilberttValentine/practica-app-movil/master/sprites/types/poison.png")
+                            .into(view.imgIco)
                     }
                 }
             }
