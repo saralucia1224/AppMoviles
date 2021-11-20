@@ -16,8 +16,8 @@ object EstudianteData {
     }
 
     fun agregar(estudiante:Estudiante){
-        db.guardarEstudiante(estudiante)
-        listaEstudiantes.add(0, estudiante)
+        //db.guardarEstudiante(estudiante)
+        listaEstudiantes.add(estudiante)
     }
 
     fun agregarAmigo(codigoEstudiante: String, codigoAmigo:String){
@@ -29,7 +29,7 @@ object EstudianteData {
     }
 
     fun eliminar(codigo:String){
-        db.eliminarEstudiante(codigo)
+        //db.eliminarEstudiante(codigo)
         for ( e in listaEstudiantes ){
             if(e.codigo == codigo){
                 listaEstudiantes.remove(e)
@@ -39,11 +39,12 @@ object EstudianteData {
     }
 
     fun obtener(codigo:String):Estudiante?{
-        return db.obtenerEstudiante(codigo)
+        //return db.obtenerEstudiante(codigo)
+        return listaEstudiantes.firstOrNull { it.codigo == codigo }
     }
 
     fun modificar(estudiante: Estudiante){
-        db.actualizarEstudiante(estudiante)
+        //db.actualizarEstudiante(estudiante)
         for ( (i,e) in listaEstudiantes.withIndex() ){
             if(e.codigo == estudiante.codigo){
                 listaEstudiantes[i] = estudiante
@@ -53,7 +54,7 @@ object EstudianteData {
     }
 
     fun listar():ArrayList<Estudiante>{
-        listaEstudiantes = db.obtenerLista()
+        //listaEstudiantes = db.obtenerLista()
         return listaEstudiantes
     }
 

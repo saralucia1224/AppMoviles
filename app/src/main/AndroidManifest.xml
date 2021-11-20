@@ -9,6 +9,9 @@
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE"/>
 
     <queries>
         <intent>
@@ -24,17 +27,27 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MyTestApp">
         <activity
-            android:name=".activity.ListaPokemonActivity">
+            android:name=".activity.ForgotPassword"
+            android:exported="true" />
+        <activity
+            android:name=".activity.RegistroActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activity.LoginActivity"
+            android:exported="true" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".activity.ListaPokemonActivity">
+
+        </activity>
         <activity
             android:name=".activity.NavegacionActivity"
             android:exported="true"
-            android:theme="@style/Theme.MyTestApp.NoActionBar"></activity>
+            android:theme="@style/Theme.MyTestApp.NoActionBar" />
         <activity
             android:name=".activity.Navegacion2Activity"
             android:exported="true" />
@@ -46,8 +59,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.ListaActivity"
-            android:exported="true">
-        </activity>
+            android:exported="true" />
         <activity
             android:name=".activity.Pantalla3Activity"
             android:exported="true" />
@@ -56,7 +68,7 @@
             android:exported="true" />
         <activity
             android:name=".activity.MainActivity"
-            android:exported="true"></activity>
+            android:exported="true" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

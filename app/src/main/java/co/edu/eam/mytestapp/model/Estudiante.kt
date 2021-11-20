@@ -8,17 +8,28 @@ import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
-class Estudiante (var codigo:String?, var fechaNacimiento:Date, var nombre:String?, var notas:FloatArray?) : Parcelable{
+class Estudiante () : Parcelable{
 
+    var codigo:String? = ""
+    var fechaNacimiento:Date? = null
+    var nombre:String? = ""
+    var notas:List<Float> = ArrayList()
     var amigos:ArrayList<Estudiante> = ArrayList()
+    var key:String? = null
 
-    constructor(parcel: Parcel) : this(
-        parcel.readString(),
-        parcel.readSerializable() as Date,
-        parcel.readString(),
-        parcel.createFloatArray()
-    ) {
+    constructor(parcel: Parcel) : this() {
+        parcel.readString()
+        parcel.readSerializable() as Date
+        parcel.readString()
+        notas = parcel.createTypedArrayList(CREATOR) as ArrayList<Float>
         amigos = parcel.createTypedArrayList(CREATOR) as ArrayList<Estudiante>
+    }
+
+    constructor(codigo:String?, fechaNacimiento:Date, nombre:String?, notas:List<Float>):this(){
+        this.codigo = codigo
+        this.fechaNacimiento = fechaNacimiento
+        this.nombre = nombre
+        this.notas = notas
     }
 
     override fun describeContents(): Int {
@@ -29,12 +40,12 @@ class Estudiante (var codigo:String?, var fechaNacimiento:Date, var nombre:Strin
         dest?.writeString(codigo)
         dest?.writeSerializable(fechaNacimiento)
         dest?.writeString(nombre)
-        dest?.writeFloatArray(notas)
+        dest?.writeList(notas)
         dest?.writeTypedList(amigos)
     }
 
     override fun toString(): String {
-        return "Estudiante(codigo=$codigo, fechaNacimiento=$fechaNacimiento, nombre=$nombre, notas=${notas?.contentToString()}, amigos=$amigos)"
+        return "Estudiante(codigo=$codigo, fechaNacimiento=$fechaNacimiento, nombre=$nombre, notas=${notas}, amigos=$amigos)"
     }
 
     override fun equals(other: Any?): Boolean {

@@ -46,7 +46,7 @@ class CrearEstudianteActivity : AppCompatActivity() {
                 Log.e("VALOR", (binding.listaNotas.getChildAt(i) as EditText).text.toString())
             }*/
 
-            EstudianteData.agregar(Estudiante("232", Date(), "Luz", floatArrayOf(3.4F, 3.2F, 4.1F)))
+            EstudianteData.agregar(Estudiante("232", Date(), "Luz", floatArrayOf(3.4F, 3.2F, 4.1F).toList()))
             intent.putExtra("RESPUESTA", "El estudiante se creó")
             setResult(14, intent)
         }else{

@@ -53,7 +53,7 @@ class AgregarFragment : DialogFragment() {
                         binding.nota1Est.text.toString().toFloat(),
                         binding.nota2Est.text.toString().toFloat(),
                         binding.nota3Est.text.toString().toFloat()
-                    )
+                    ).toList()
                 )
                 listener.onEstudianteCreado(estudiante)
                 dismiss()

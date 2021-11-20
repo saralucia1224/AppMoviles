@@ -59,9 +59,9 @@ class MainActivity : AppCompatActivity() {
         Log.v(TAG, "Pasar a la pantalla 3")
         val intent = Intent(this, Pantalla3Activity::class.java)
 
-        val estudiante1 = Estudiante("12", Date(), "Pepito", floatArrayOf(3.6F, 4.6F, 2.4F) )
+        val estudiante1 = Estudiante("12", Date(), "Pepito", floatArrayOf(3.6F, 4.6F, 2.4F).toList() )
 
-        val estudiante2 = Estudiante( "14", Date(), "Juanita", floatArrayOf(3.6F, 3.6F, 3.4F) )
+        val estudiante2 = Estudiante( "14", Date(), "Juanita", floatArrayOf(3.6F, 3.6F, 3.4F).toList() )
         estudiante2.amigos.add(estudiante1)
 
         intent.putExtra(Constantes.KEY_ESTUDIANTE, estudiante2)

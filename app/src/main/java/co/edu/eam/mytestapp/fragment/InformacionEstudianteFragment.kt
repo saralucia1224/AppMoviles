@@ -48,7 +48,7 @@ class InformacionEstudianteFragment : Fragment() {
         if(estudiante!=null){
             binding.nombreDetalle.text = estudiante.nombre
             binding.fechaDetalle.text = sdf.format(estudiante.fechaNacimiento)
-            binding.notasDetalle.text = estudiante.notas.contentToString()
+            binding.notasDetalle.text = estudiante.notas.toString()
         }
     }
 

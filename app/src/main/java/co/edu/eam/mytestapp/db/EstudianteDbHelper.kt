@@ -93,7 +93,7 @@ class EstudianteDbHelper(context:Context):SQLiteOpenHelper(context, DATABASE_NAM
                         cursor.getString(0),
                         sdf.parse(cursor.getString(2)),
                         cursor.getString(1),
-                        floatArrayOf( cursor.getFloat(3), cursor.getFloat(4), cursor.getFloat(5) )
+                        floatArrayOf( cursor.getFloat(3), cursor.getFloat(4), cursor.getFloat(5) ).toList()
                     )
                 )
 
@@ -123,7 +123,7 @@ class EstudianteDbHelper(context:Context):SQLiteOpenHelper(context, DATABASE_NAM
                 cursor.getString(0),
                 sdf.parse(cursor.getString(2)),
                 cursor.getString(1),
-                floatArrayOf( cursor.getFloat(3), cursor.getFloat(4), cursor.getFloat(5) ) )
+                floatArrayOf( cursor.getFloat(3), cursor.getFloat(4), cursor.getFloat(5) ) .toList())
         }
 
         return estudiante
@@ -158,7 +158,7 @@ class EstudianteDbHelper(context:Context):SQLiteOpenHelper(context, DATABASE_NAM
 
         if(c.moveToFirst()){
             do{
-                lista.add( Estudiante( c.getString(0), sdf.parse( c.getString(2) ), c.getString(1), floatArrayOf( c.getFloat(3), c.getFloat(4), c.getFloat(5) ) ) )
+                lista.add( Estudiante( c.getString(0), sdf.parse( c.getString(2) ), c.getString(1), floatArrayOf( c.getFloat(3), c.getFloat(4), c.getFloat(5) ).toList() ) )
             }while (c.moveToNext());
         }
 

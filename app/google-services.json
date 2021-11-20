@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "667505939416",
+    "firebase_url": "https://mytestapp-1fb02-default-rtdb.firebaseio.com",
+    "project_id": "mytestapp-1fb02",
+    "storage_bucket": "mytestapp-1fb02.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:667505939416:android:83d2cacfab2a12da3a18ad",
+        "android_client_info": {
+          "package_name": "co.edu.eam.mytestapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "667505939416-o2fk65v1eo42l3okagulv6jnb3hesea1.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDKzsXcKRaZa8liIBaTRg5DyYKdMbACZgY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "667505939416-o2fk65v1eo42l3okagulv6jnb3hesea1.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

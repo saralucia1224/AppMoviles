@@ -5,8 +5,8 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Canvas
 import android.os.Bundle
+import android.util.Log
 import android.view.*
-import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -19,6 +19,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import co.edu.eam.mytestapp.R
 import co.edu.eam.mytestapp.activity.CrearEstudianteActivity
+import co.edu.eam.mytestapp.activity.LoginActivity
 import co.edu.eam.mytestapp.adapter.EstudianteAdapter
 import co.edu.eam.mytestapp.databinding.FragmentListaEstudiantesBinding
 import co.edu.eam.mytestapp.model.Estudiante
@@ -26,8 +27,11 @@ import co.edu.eam.mytestapp.service.EstudianteData
 import co.edu.eam.mytestapp.utils.Idioma
 import com.google.android.material.snackbar.Snackbar
 import it.xabaras.android.recyclerview.swipedecorator.RecyclerViewSwipeDecorator
+import co.edu.eam.mytestapp.utils.ManagerFirebase
+import com.google.firebase.auth.ktx.auth
+import com.google.firebase.ktx.Firebase
 
-class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudianteAdapter, AgregarFragment.OnEstudianteCreadoListener {
+class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudianteAdapter, AgregarFragment.OnEstudianteCreadoListener, ManagerFirebase.OnActualizarAdapter {
 
     lateinit var binding: FragmentListaEstudiantesBinding
     lateinit var codigo:String
@@ -59,6 +63,10 @@ class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudiante
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        EstudianteData.listaEstudiantes.clear()
+
+        ManagerFirebase.listener = this
+        ManagerFirebase.escucharEventosEstudiantes()
         if(arguments!=null){
             this.codigo = requireArguments().getString("codigo", "-1")
         }
@@ -113,6 +121,12 @@ class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudiante
                 intent!!.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK
                 activity?.finish()
                 activity?.startActivity(intent)
+            }
+            R.id.cerrar_sesion -> {
+                Firebase.auth.signOut()
+                val intent = Intent(requireContext(), LoginActivity::class.java)
+                requireActivity().startActivity( intent )
+                requireActivity().finish()
             }
         }
 
@@ -173,8 +187,7 @@ class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudiante
             val estudiante = EstudianteData.listaEstudiantes[pos]
             when(direction){
                 ItemTouchHelper.LEFT -> {
-                    EstudianteData.eliminar(estudiante.codigo!!)
-                    adapter.notifyItemRemoved(pos)
+                    ManagerFirebase.eliminarEstudiante(estudiante.key!!)
                     Snackbar.make(binding.listaEstud, "EL estudiante se llama ${estudiante.nombre}", Snackbar.LENGTH_LONG)
                         .setAction("Deshacer", View.OnClickListener {
                             EstudianteData.listaEstudiantes.add(pos, estudiante)
@@ -182,10 +195,10 @@ class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudiante
                         }).show()
                 }
                 ItemTouchHelper.RIGHT -> {
-                    val i = Intent(requireContext(), CrearEstudianteActivity::class.java)
-                    i.putExtra("estudiante", estudiante)
-                    i.putExtra("posicion", pos)
-                    resultLauncher.launch(i)
+                    val key = estudiante.key
+                    estudiante.nombre = "Nombre modificado"
+                    estudiante.key = null
+                    ManagerFirebase.actualizarEstudiante(key!!, estudiante)
                 }
             }
         }
@@ -226,8 +239,24 @@ class ListaEstudiantesFragment : Fragment(), EstudianteAdapter.OnClickEstudiante
     }
 
     override fun onEstudianteCreado(estudiante: Estudiante) {
+        ManagerFirebase.guardarEstudiante(estudiante)
+    }
+
+    override fun agregarEstudianteAdapter(estudiante: Estudiante) {
         EstudianteData.agregar(estudiante)
-        adapter.notifyItemInserted(0)
+        Log.v("ManagerFirebase", estudiante.key!!)
+        adapter.notifyItemInserted( lista.size-1 )
+    }
+
+    override fun eliminarEstudianteAdapter(estudiante: Estudiante) {
+        val pos = EstudianteData.listaEstudiantes.indexOf(estudiante)
+        EstudianteData.eliminar(estudiante.codigo!!)
+        adapter.notifyItemRemoved( pos )
+    }
+
+    override fun actualizarEstudianteAdapter(estudiante: Estudiante) {
+        EstudianteData.modificar(estudiante)
+        adapter.notifyItemChanged( EstudianteData.listaEstudiantes.indexOf(estudiante) )
     }
 
 }
